@@ -32,16 +32,26 @@ public class Animation2DController : MonoBehaviour
         if(!walkForwardPressed && velocityZ > 0.0f ){
             velocityZ-=Time.deltaTime*deceleration;
         }
-        //reset velocity forward
-        if(!walkForwardPressed && velocityZ < 0.0f ){
-            velocityZ=0.0F;
-        }
 
-        
+        //accelerate backward
+        if (walkBackwardPressed && velocityZ > -currentMaxVelocity)
+        {
+            velocityZ -= Time.deltaTime * acceleration;
+        }
+        //decelerate backward
+        if (!walkBackwardPressed && velocityZ < 0.0f)
+        {
+            velocityZ += Time.deltaTime * deceleration;
+        }
+        //reset velocity backward
+        if (!walkForwardPressed && !walkBackwardPressed && velocityZ != 0.0f && (velocityZ > -currentMaxVelocity && velocityZ < currentMaxVelocity))
+        {
+            velocityZ = 0.0F;
+        }
 
 
         //accelerate left
-        if(walkLeftPressed && velocityX >-currentMaxVelocity ){
+        if (walkLeftPressed && velocityX >-currentMaxVelocity ){
             velocityX-=Time.deltaTime*acceleration;
         }
         //accelerate right
