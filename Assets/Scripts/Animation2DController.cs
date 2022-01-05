@@ -88,8 +88,26 @@ public class Animation2DController : MonoBehaviour
             velocityZ=currentMaxVelocity;
         }
 
+        // Backward lock
+        if (walkBackwardPressed && runPressed && velocityZ < -currentMaxVelocity)
+        {
+            velocityZ = -currentMaxVelocity;
+        }
+        else if (walkBackwardPressed && velocityZ < -currentMaxVelocity)
+        {
+            velocityZ += Time.deltaTime * deceleration;
+            if (velocityZ < -currentMaxVelocity && velocityZ > (-currentMaxVelocity - 0.05f))
+            {
+                velocityZ = -currentMaxVelocity;
+            }
+        }
+        else if (walkBackwardPressed && velocityZ > -currentMaxVelocity && velocityZ < (-currentMaxVelocity + 0.05f))
+        {
+            velocityZ = -currentMaxVelocity;
+        }
+
         // left LOCKING
-        if(walkLeftPressed && runPressed && velocityX < -currentMaxVelocity ){
+        if (walkLeftPressed && runPressed && velocityX < -currentMaxVelocity ){
             velocityX= -currentMaxVelocity;
         }
         else if(walkLeftPressed  && velocityX < -currentMaxVelocity ){
@@ -104,9 +122,8 @@ public class Animation2DController : MonoBehaviour
 
 
 
-
         // right locking
-        if(walkRightPressed && runPressed && velocityX > currentMaxVelocity ){
+        if (walkRightPressed && runPressed && velocityX > currentMaxVelocity ){
             velocityX=currentMaxVelocity;
         }
         else if(walkRightPressed  && velocityX > currentMaxVelocity ){

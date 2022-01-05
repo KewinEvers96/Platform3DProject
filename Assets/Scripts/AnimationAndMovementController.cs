@@ -19,6 +19,10 @@ public class AnimationAndMovementController : MonoBehaviour
     float rotationFactorPerFrame = 15.0f;
     #endregion
 
+    #region Player_Input_Jump_Control_Variables
+    bool isJumpPressed = false;
+    #endregion
+
     void Awake()
     {
         playerInput = new PlayerInput();
@@ -37,7 +41,10 @@ public class AnimationAndMovementController : MonoBehaviour
 
         playerInput.CharacterControls.Run.canceled += OnInputRun;
 
-        playerInput.CharacterControls.Run.performed += OnInputRun;
+        playerInput.CharacterControls.Jump.started += OnInputJump;
+
+        playerInput.CharacterControls.Jump.canceled += OnInputJump;
+
     }
 
     void handleRotation()
@@ -88,6 +95,12 @@ public class AnimationAndMovementController : MonoBehaviour
     void OnInputRun(InputAction.CallbackContext context)
     {
         isRunPressed = context.ReadValueAsButton();
+    }
+
+    void OnInputJump(InputAction.CallbackContext context)
+    {
+        isJumpPressed = context.ReadValueAsButton();
+        Debug.Log(isJumpPressed);
     }
 
     // Update is called once per frame
