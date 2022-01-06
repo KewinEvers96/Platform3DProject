@@ -28,9 +28,14 @@ public class AnimationAndMovementController : MonoBehaviour
     #region Player_Input_Jump_Control_Variables
     bool isJumpPressed = false;
     float initialJumpVelocity;
-    float maxJumpHeight = 1.0f;
-    float maxJumpTime= 0.5f;
+    float maxJumpHeight = 4.0f;
+    float maxJumpTime= 0.75f;
     bool isJumping = false;
+    bool isJumpAnimating=false;
+   int jumpCount=0;
+   Dictionary<int,float> initialJumpVelocities= new Dictionary<int,float>();
+   Dictionary<int,float> jumpGravities= new Dictionary<int,float>();
+   Coroutine currentJumpResetRoutine=null;
     #endregion
 
     void Awake()
@@ -63,15 +68,38 @@ public class AnimationAndMovementController : MonoBehaviour
         float timeToApex = maxJumpTime / 2;
         gravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
         initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
-    }
+        float secondJumpGravity=(-2 * (maxJumpHeight+2)) / Mathf.Pow((timeToApex*1.25f), 2);
+        float secondJumpInitialVelocity=(2 * (maxJumpHeight+2)) / (timeToApex*1.25f);
+        float thirdJumpGravity=(-2 * (maxJumpHeight+4)) / Mathf.Pow((timeToApex*1.5f), 2);
+        float thirdJumpInitialVelocity=(2 * (maxJumpHeight+4)) / (timeToApex*1.5f);
+        initialJumpVelocities.Add(1,initialJumpVelocity);
+        initialJumpVelocities.Add(2,secondJumpInitialVelocity);
+        initialJumpVelocities.Add(3,thirdJumpInitialVelocity);
 
+        jumpGravities.Add(0,gravity);
+        jumpGravities.Add(1,gravity);
+        jumpGravities.Add(2,secondJumpGravity);
+        jumpGravities.Add(3,thirdJumpGravity);
+    }
+    //IEnumerator jumpResetRoutine(){
+    //   yield return new WaitForSeconds(0.5f);
+    //    jumpCount=0;
+  //  }
     void handleJump()
     {
         if(!isJumping && characterController.isGrounded && isJumpPressed)
         {
+          //  if(jumpCount<3 && currentJumpResetRoutine!= null){
+           //     StopCoroutine(currentJumpResetRoutine);
+           // }
+
+            animator.SetBool("isJumping",true);
+            isJumpAnimating=true;
             isJumping = true;
-            currentMovement.y = initialJumpVelocity * .5f;
-            currentMovement.y = initialJumpVelocity * .5f;
+            jumpCount+=1;
+            animator.SetInteger("jumpCount",jumpCount);
+            currentMovement.y = initialJumpVelocities[jumpCount] * .5f;
+            currentMovement.y = initialJumpVelocities[jumpCount] * .5f;
         }else if (!isJumpPressed && isJumping && characterController.isGrounded)
         {
             isJumping = false;
@@ -102,13 +130,22 @@ public class AnimationAndMovementController : MonoBehaviour
 
         if(characterController.isGrounded)
         {
+            if(isJumpAnimating){
+            animator.SetBool("isJumping",false);
+           // currentJumpResetRoutine=  StartCoroutine(jumpResetRoutine());
+            
+            if(jumpCount==3){
+                jumpCount=0;
+                animator.SetInteger("jumpCount",jumpCount);
+            }
+            }
             currentMovement.y = groundedGravity;
             currentRunMovement.y = groundedGravity;
         }
         else if (isFalling)
         {
             float previousYVelocity = currentMovement.y;
-            float newYVelocity = currentMovement.y + (gravity * fallMultiplier * Time.deltaTime);
+            float newYVelocity = currentMovement.y + (jumpGravities[jumpCount] * fallMultiplier * Time.deltaTime);
             float nextYVelocity = (previousYVelocity + newYVelocity) * .5f;
             currentMovement.y = nextYVelocity;
             currentRunMovement.y = nextYVelocity;
@@ -116,7 +153,7 @@ public class AnimationAndMovementController : MonoBehaviour
         else
         {
             float previousYVelocity = currentMovement.y;
-            float newYVelocity = currentMovement.y + (gravity * Time.deltaTime);
+            float newYVelocity = currentMovement.y + (jumpGravities[jumpCount] * Time.deltaTime);
             float nextYVelocity = (previousYVelocity + newYVelocity) * .5f;
             currentMovement.y = nextYVelocity;
             currentRunMovement.y = nextYVelocity;
