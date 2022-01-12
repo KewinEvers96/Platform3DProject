@@ -6,7 +6,6 @@ public enum NavMeshAgentState
 {
     Idle,
     Moving,
-
     Fighting,
 }
 public class PlayerMovement : MonoBehaviour
@@ -35,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start() {
         m_NavMeshAgent = GetComponent<NavMeshAgent>();
+        m_NavMeshAgent.speed = 2f;
     }
 
     void Update()
@@ -49,12 +49,12 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        Debug.Log("run");
+/* Debug.Log("run");
         Debug.Log(run);
         Debug.Log("figth");
         Debug.Log(figth);
         Debug.Log("idle");
-        Debug.Log(idle);
+        Debug.Log(idle);*/
         animator.SetBool("IsMoving", run);
         animator.SetBool("IsFighting", figth);
         animator.SetBool("Idle", idle);

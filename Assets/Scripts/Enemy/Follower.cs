@@ -15,7 +15,7 @@ public class Follower : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(Vector3.Distance(m_Target.position, m_MovableAgent.TargetPosition));
+       // Debug.Log(Vector3.Distance(m_Target.position, m_MovableAgent.TargetPosition));
         if (m_Target != null && Vector3.Distance(m_Target.position, m_MovableAgent.TargetPosition) > 0.1f)
         {
             m_MovableAgent.GoTo(m_Target.position, OnArrive);
@@ -29,7 +29,7 @@ public class Follower : MonoBehaviour
 
     private void OnArrive()
     {
-        Debug.Log("Arrived");
+       // Debug.Log("Arrived");
         PlayerMovement.figth = true;
         PlayerMovement.run = false;
         PlayerMovement.idle = false;
