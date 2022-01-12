@@ -7,29 +7,35 @@ public class Follower : MonoBehaviour
     [SerializeField] private Transform m_Target;
 
     private PlayerMovement m_MovableAgent;
+    private Transform m_Agent;
+
+    float distance;
 
     void Start()
     {
         m_MovableAgent = GetComponent<PlayerMovement>();
+        m_Agent = GetComponent<Transform>();
     }
 
     void Update()
     {
-       // Debug.Log(Vector3.Distance(m_Target.position, m_MovableAgent.TargetPosition));
-        if (m_Target != null && Vector3.Distance(m_Target.position, m_MovableAgent.TargetPosition) > 0.1f)
+        distance = Vector3.Distance(m_Target.position, m_Agent.position);
+        if (m_Target != null && distance >= 1.5f && distance < 10f)
         {
-            m_MovableAgent.GoTo(m_Target.position, OnArrive);
+            m_MovableAgent.GoTo(m_Target.position);
         }
-        else if (m_Target != null && Vector3.Distance(m_Target.position, m_MovableAgent.TargetPosition) > 10f){
+        else if (m_Target != null && distance > 10f){
             PlayerMovement.idle = true;
             PlayerMovement.figth = false;
             PlayerMovement.run = false;
+        }
+        else if (m_Target != null && distance < 1.5f){
+            OnArrive();
         }
     }
 
     private void OnArrive()
     {
-       // Debug.Log("Arrived");
         PlayerMovement.figth = true;
         PlayerMovement.run = false;
         PlayerMovement.idle = false;
