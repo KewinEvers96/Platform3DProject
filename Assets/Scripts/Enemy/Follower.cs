@@ -25,7 +25,7 @@ public class Follower : MonoBehaviour
             m_MovableAgent.GoTo(m_Target.position);
         }
         else if (m_Target != null && distance > 10f){
-            PlayerMovement.idle = true;
+            PlayerMovement.walk = true;
             PlayerMovement.figth = false;
             PlayerMovement.run = false;
         }
@@ -38,6 +38,6 @@ public class Follower : MonoBehaviour
     {
         PlayerMovement.figth = true;
         PlayerMovement.run = false;
-        PlayerMovement.idle = false;
+        PlayerMovement.walk = false;
     }
 }
