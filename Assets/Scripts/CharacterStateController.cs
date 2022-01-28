@@ -40,6 +40,13 @@ public class CharacterStateController : MonoBehaviour
             collectable.OnCollected(this);
             Debug.Log("coins: " + _coinsCollected);
         }
+
+        if (other.CompareTag("CoinSpawner"))
+        {
+            CoinSpawner coinSpawner = other.GetComponent<CoinSpawner>();
+            coinSpawner.SpawnCoins();
+        }
+
     }
 
 }

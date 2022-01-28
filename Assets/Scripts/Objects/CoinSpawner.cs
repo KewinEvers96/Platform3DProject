@@ -7,6 +7,7 @@ public class CoinSpawner : MonoBehaviour
 
     const string prefabPath = "Prefab/";
 
+    #region attributes
     [SerializeField]
     int numberOfCoins = 3;
     [SerializeField]
@@ -19,6 +20,8 @@ public class CoinSpawner : MonoBehaviour
     Vector3 currentPosition;
     Vector3 squareCorner;
 
+    bool coinsSpawned;
+    #endregion
     // Start is called before the first frame update
     void Start()
     {
@@ -28,17 +31,24 @@ public class CoinSpawner : MonoBehaviour
                                     currentPosition.y + 1, 
                                     currentPosition.z + numberOfCoins);
         spaceBeetweenCoins = separationRatio * numberOfCoins;
+        coinsSpawned = false;
+    }
 
-        int i, j;
-
-        for(i = 0; i < numberOfCoins; i++)
+    public void SpawnCoins() 
+    {
+        if(!coinsSpawned)
         {
-            for (j = 0; j < numberOfCoins; j++)
+            coinsSpawned = true;
+            int i, j;
+            for (i = 0; i < numberOfCoins; i++)
             {
+                for (j = 0; j < numberOfCoins; j++)
+                {
 
-                Instantiate<GameObject>(coinPrefab,
-                    new Vector3(squareCorner.x + (i * spaceBeetweenCoins), squareCorner.y, squareCorner.z - (j * spaceBeetweenCoins)), 
-                    Quaternion.identity);
+                    Instantiate<GameObject>(coinPrefab,
+                        new Vector3(squareCorner.x + (i * spaceBeetweenCoins), squareCorner.y, squareCorner.z - (j * spaceBeetweenCoins)),
+                        Quaternion.identity);
+                }
             }
         }
     }
