@@ -39,6 +39,7 @@ RenderSettings:
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
   m_IndirectSpecularColor: {r: 0.44659358, g: 0.49642974, b: 0.57482505, a: 1}
+
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -282,6 +283,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 758eaf5c2ae115747b146995206b76c8, type: 3}
+
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &963194225
@@ -477,9 +479,10 @@ Transform:
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1404956896
+
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -575,6 +578,7 @@ Transform:
   - {fileID: 935071554}
   m_Father: {fileID: 0}
   m_RootOrder: 3
+
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1516676729 stripped
 GameObject:
@@ -1466,6 +1470,10 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 82a2914d8f86c62488456950c8330e38, type: 3}
       propertyPath: m_Name
       value: Jammo_LowPoly
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 82a2914d8f86c62488456950c8330e38, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82a2914d8f86c62488456950c8330e38, type: 3}
