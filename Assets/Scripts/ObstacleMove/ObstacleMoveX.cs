@@ -10,9 +10,9 @@ public class ObstacleMoveX : MonoBehaviour
     [SerializeField]
     float move =2;
     [SerializeField]
-    float LimiteDerecho = 4;
+    float LimiteDerecho ;
     [SerializeField]
-    float LimiteIzquierdo = -4;
+    float LimiteIzquierdo ;
 
 
     void Update()
