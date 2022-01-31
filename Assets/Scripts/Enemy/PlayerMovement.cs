@@ -10,9 +10,11 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 TargetPosition => m_TargetPosition;
     public Animator animator;
 
+    private Action m_OnArrive;
+
     public static bool figth;
     public static bool run;
-    public static bool idle;
+    public static bool walk;
 
     private void Start() {
         m_NavMeshAgent = GetComponent<NavMeshAgent>();
@@ -23,16 +25,22 @@ public class PlayerMovement : MonoBehaviour
     {
         animator.SetBool("IsMoving", run);
         animator.SetBool("IsFighting", figth);
-        animator.SetBool("Idle", idle);          
+        animator.SetBool("isWalking", walk);      
     }
 
     public void GoTo(Vector3 position)
     {
-        PlayerMovement.idle = false;
+        PlayerMovement.walk = false;
         PlayerMovement.figth = false;
         PlayerMovement.run = true;
         m_NavMeshAgent.isStopped = false;
+        Patrol.startPatrol = false;
         m_TargetPosition = position;
+        m_NavMeshAgent.SetDestination(position);
+    }
+
+    public void FollowPatrol(Vector3 position)
+    {
         m_NavMeshAgent.SetDestination(position);
     }
 
