@@ -43,12 +43,12 @@ public class MoveWhitFloor : MonoBehaviour
                 lastGroundPosition = groundPosition;
 
 
-                if (groundedIn.CompareTag("Destructable") && !touchPlatform)
+                if (groundedIn.CompareTag("Destructable") && !touchPlatform && !groundedIn.gameObject.GetComponent<DestructablePlatorm>().DestructionStarted)
                 {
-                    Debug.Log("Moshi");
                     touchPlatform = true;
                     DestructablePlatorm destructable = groundedIn.GetComponent<DestructablePlatorm>();
-                    destructable.addTouch();
+                    destructable.startTimer();
+
                 }
 
             }
