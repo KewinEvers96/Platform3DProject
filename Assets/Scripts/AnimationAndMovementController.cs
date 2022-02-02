@@ -38,6 +38,12 @@ public class AnimationAndMovementController : MonoBehaviour
    Coroutine currentJumpResetRoutine=null;
     #endregion
 
+    #region Constant_Values
+    [SerializeField]
+    float speed = 5f;
+    #endregion
+
+
     void Awake()
     {
         playerInput = new PlayerInput();
@@ -182,8 +188,8 @@ public class AnimationAndMovementController : MonoBehaviour
         currentMovementInput = context.ReadValue<Vector2>();
         currentMovement.x = currentMovementInput.x;
         currentMovement.z = currentMovementInput.y;
-        currentRunMovement.x = currentMovementInput.x * 3.0f;
-        currentRunMovement.z = currentMovementInput.y * 3.0f;
+        currentRunMovement.x = currentMovementInput.x * speed;
+        currentRunMovement.z = currentMovementInput.y * speed;
         isMovementPressed = currentMovement.x != 0 || currentMovement.z != 0;
     }
 
