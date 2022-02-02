@@ -10,6 +10,7 @@ public class MoveWhitFloor : MonoBehaviour
     Vector3 lastGroundPosition;
     string groundName;
     string lastGroundName;
+    bool touchPlatform = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,10 +37,21 @@ public class MoveWhitFloor : MonoBehaviour
 
                 lastGroundName = groundName;
                 lastGroundPosition = groundPosition;
+
+
+                if (groundedIn.CompareTag("Destructable") && !touchPlatform)
+                {
+                    Debug.Log("Moshi");
+                    touchPlatform = true;
+                    DestructablePlatorm destructable = groundedIn.GetComponent<DestructablePlatorm>();
+                    destructable.addTouch();
+                }
+
             }
         }
         else if (!player.isGrounded)
         {
+            touchPlatform = false;
             lastGroundName = null;
             lastGroundPosition = Vector3.zero;
         }
