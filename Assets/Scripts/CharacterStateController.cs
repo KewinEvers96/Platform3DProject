@@ -46,7 +46,6 @@ public class CharacterStateController : MonoBehaviour
             CoinSpawner coinSpawner = other.GetComponent<CoinSpawner>();
             coinSpawner.SpawnCoins();
         }
-
     }
 
 }
