@@ -5,8 +5,9 @@ using UnityEngine;
 public class MoveWhitFloor : MonoBehaviour
 {
     CharacterController player;
-
+    [SerializeField]
     Vector3 groundPosition;
+    [SerializeField]
     Vector3 lastGroundPosition;
     string groundName;
     string lastGroundName;
@@ -32,9 +33,6 @@ public class MoveWhitFloor : MonoBehaviour
                 GameObject groundedIn = hit.collider.gameObject;
                 groundName = groundedIn.name;
                 groundPosition = groundedIn.transform.position;
-
-                Debug.Log(groundPosition + " " + lastGroundPosition + " ");
-                Debug.Log(groundName + " " + lastGroundName);
                 if (groundPosition != lastGroundPosition && groundName == lastGroundName)
                 {
                     this.transform.position += groundPosition - lastGroundPosition;
@@ -42,10 +40,6 @@ public class MoveWhitFloor : MonoBehaviour
 
                 lastGroundName = groundName;
                 lastGroundPosition = groundPosition;
-            }
-            else
-            {
-                Debug.Log("False");
             }
         }
         else if (!player.isGrounded)
