@@ -15,9 +15,9 @@ public class ObstacleMoveZ : MonoBehaviour
     float LimiteAtras = -4;
 
 
-    void Update()
+    void FixedUpdate()
     { 
-        transform.Translate(0,0,move*Time.deltaTime);
+        transform.Translate(0,0,move*Time.fixedDeltaTime);
         if (transform.position.z>=LimiteAdelante && MoverZ)
         {
             move=move*(-1);
