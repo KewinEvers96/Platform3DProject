@@ -48,7 +48,6 @@ public class MoveWhitFloor : MonoBehaviour
             lastGroundPosition = Vector3.zero;
         }
     }
-
     private void OnDrawGizmos ()
     {
         player = this.GetComponent<CharacterController>();
