@@ -2507,13 +2507,17 @@ PrefabInstance:
       propertyPath: spawnPointTRAN
       value: 
       objectReference: {fileID: 2076879424}
+    - target: {fileID: 4709030453774543197, guid: e6034e4381f26424baf280d702491aaa, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4709030455453630460, guid: e6034e4381f26424baf280d702491aaa, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4709030455453630460, guid: e6034e4381f26424baf280d702491aaa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 3.1
       objectReference: {fileID: 0}
     - target: {fileID: 4709030455453630460, guid: e6034e4381f26424baf280d702491aaa, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2521,7 +2525,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4709030455453630460, guid: e6034e4381f26424baf280d702491aaa, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1.2
       objectReference: {fileID: 0}
     - target: {fileID: 4709030455453630460, guid: e6034e4381f26424baf280d702491aaa, type: 3}
       propertyPath: m_LocalRotation.w
