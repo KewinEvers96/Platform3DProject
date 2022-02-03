@@ -32,12 +32,28 @@ public class AnimationAndMovementController : MonoBehaviour
     float maxJumpTime= 0.75f;
     bool isJumping = false;
     bool isJumpAnimating=false;
+   
    int jumpCount=0;
    Dictionary<int,float> initialJumpVelocities= new Dictionary<int,float>();
    Dictionary<int,float> jumpGravities= new Dictionary<int,float>();
    Coroutine currentJumpResetRoutine=null;
     #endregion
-
+    #region Attack
+    bool isAttacking = false; 
+    bool isAttackPressed = false;
+    [SerializeField]
+    public GameObject energyballPFAB;
+    [SerializeField]
+    public GameObject fireballPFAB;
+    [SerializeField]
+    public float chargeTime ;
+    public float fireballSpeed;
+    GameObject energyballOBJ;
+    GameObject fireballOBJ;
+    [SerializeField]
+    public Transform spawnPointTRAN;
+   
+    #endregion
     #region Constant_Values
     [SerializeField]
     float speed = 5f;
@@ -65,6 +81,10 @@ public class AnimationAndMovementController : MonoBehaviour
         playerInput.CharacterControls.Jump.started += OnInputJump;
 
         playerInput.CharacterControls.Jump.canceled += OnInputJump;
+
+        playerInput.CharacterControls.Attack.started += OnInputAttack;
+
+        playerInput.CharacterControls.Attack.canceled += OnInputAttack;
 
         setupJumpVariables();
     }
@@ -182,7 +202,19 @@ public class AnimationAndMovementController : MonoBehaviour
         }
 
     }
-
+void handleAttack()
+    {
+       if(isAttackPressed){
+            animator.SetBool("isAttacking",true);
+            energyballOBJ=Instantiate(energyballPFAB,spawnPointTRAN.position,spawnPointTRAN.rotation);
+            energyballOBJ.transform.SetParent(spawnPointTRAN);
+            Destroy(energyballOBJ,chargeTime);
+            StartCoroutine("LanchFireBall");
+        }
+        else{
+            animator.SetBool("isAttacking",false);
+        }
+    }
     void OnInputPlayerMovement(InputAction.CallbackContext context) 
     {
         currentMovementInput = context.ReadValue<Vector2>();
@@ -221,11 +253,24 @@ public class AnimationAndMovementController : MonoBehaviour
 
         handleGravity();
         handleJump();
+        handleAttack();
     }
     void OnEnable(){
         playerInput.CharacterControls.Enable();
     }
      void OnDisable(){
         playerInput.CharacterControls.Disable();
+    }
+    void OnInputAttack(InputAction.CallbackContext context)
+    {
+        Debug.Log("holi");
+        isAttackPressed = context.ReadValueAsButton();
+    }
+    IEnumerator LanchFireBall(){
+        yield return new WaitForSeconds(chargeTime-.1f);
+
+        fireballOBJ=Instantiate(fireballPFAB,spawnPointTRAN.position,spawnPointTRAN.rotation);
+
+        yield return null;
     }
 }
