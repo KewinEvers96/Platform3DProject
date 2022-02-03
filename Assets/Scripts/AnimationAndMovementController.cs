@@ -13,7 +13,7 @@ public class AnimationAndMovementController : MonoBehaviour
     #region Gravity_Control_Constants
     //Gravity constant control
     float gravity = -9.8f;
-    float groundedGravity = -.05f;
+    float groundedGravity = -9.8f;
     #endregion
 
     #region Player_Input_Values
