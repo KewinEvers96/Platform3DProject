@@ -10,7 +10,6 @@ public class Caida : MonoBehaviour
     public void CaidaLibre ()
     {
         Player.transform.position = respawnPoint.transform.position;
-        Debug.Log ("Hola");
     }
     
 }

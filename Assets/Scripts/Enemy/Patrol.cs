@@ -26,8 +26,6 @@ public class Patrol : MonoBehaviour
 
         distance = Vector3.Distance(nextPosition, m_Agent.position);
 
-        Debug.Log(PlayerMovement.walk + " " + startPatrol);
-
         if (PlayerMovement.walk == true && startPatrol == false){
 
             startPatrol = true;
