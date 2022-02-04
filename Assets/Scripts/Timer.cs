@@ -40,6 +40,11 @@ public class Timer : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        started = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -59,4 +64,11 @@ public class Timer : MonoBehaviour
         running = true;
         currentTime = 0;
     }
+
+    public void Restart()
+    {
+        currentTime = 0;
+        started = false;
+    }
+
 }
