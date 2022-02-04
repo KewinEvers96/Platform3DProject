@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 4709030455453630460}
   m_Layer: 0
   m_Name: Jammo
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -154,6 +154,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jammo_LowPoly
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 82a2914d8f86c62488456950c8330e38, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82a2914d8f86c62488456950c8330e38, type: 3}
 --- !u!1 &3636721749305889433 stripped
@@ -231,6 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa6727dbfcf9d4b4eb2d7bb92c14e0f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lifePoints: 0
 --- !u!114 &4709030453774543193
 MonoBehaviour:
   m_ObjectHideFlags: 0
