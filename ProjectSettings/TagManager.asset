@@ -9,6 +9,9 @@ TagManager:
   - Caida
   - Destructable
   - Enemy
+  - FireBall
+  - PlatformsTimer
+  - CaidaLibrePlatforms
   layers:
   - Default
   - TransparentFX
