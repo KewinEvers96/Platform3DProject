@@ -7,6 +7,8 @@ TagManager:
   - Collectable
   - CoinSpawner
   - Caida
+  - Destructable
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Floor
   - 
   - 
   - 
