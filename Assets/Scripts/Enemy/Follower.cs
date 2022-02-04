@@ -11,35 +11,40 @@ public class Follower : MonoBehaviour
 
     float distance;
 
-    [SerializeField] private float player_near = 1.5f;
+    [SerializeField] private float distance_follow = 10f;
+    [SerializeField] private float distance_figth = 1.5f;    
+
+    public State state;
 
     void Start()
     {
+        state = GetComponent<State>();
         m_MovableAgent = GetComponent<PlayerMovement>();
-        m_Agent = GetComponent<Transform>();
+        m_Agent = GetComponent<Transform>();        
     }
 
     void Update()
     {
         distance = Vector3.Distance(m_Target.position, m_Agent.position);
-        if (m_Target != null && distance >= player_near && distance < 10f)
+
+        if (m_Target != null && distance >= distance_figth && distance < distance_follow)
         {
             m_MovableAgent.GoTo(m_Target.position);
         }
-        else if (m_Target != null && distance > 10f){
-            PlayerMovement.walk = true;
-            PlayerMovement.figth = false;
-            PlayerMovement.run = false;
+        else if (m_Target != null && distance > distance_follow){
+            state.walk = true;
+            state.figth = false;
+            state.run = false;
         }
-        else if (m_Target != null && distance < player_near){
+        else if (m_Target != null && distance < distance_figth){
             OnArrive();
         }
     }
 
     private void OnArrive()
     {
-        PlayerMovement.figth = true;
-        PlayerMovement.run = false;
-        PlayerMovement.walk = false;
+        state.figth = true;
+        state.run = false;
+        state.walk = false;
     }
 }
