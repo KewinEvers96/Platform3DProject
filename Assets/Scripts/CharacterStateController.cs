@@ -61,6 +61,11 @@ public class CharacterStateController : MonoBehaviour
             caida.CaidaLibre();
         }
 
+        if (other.CompareTag("CaidaLibrePlatforms"))
+        {
+            EventManager.TriggerEvent("timerPlatformFallDown");
+        }
+
         if (other.CompareTag("Enemy"))
         {
             enemy = other.gameObject.transform;
