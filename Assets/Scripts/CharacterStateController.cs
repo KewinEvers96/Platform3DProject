@@ -11,6 +11,8 @@ public class CharacterStateController : MonoBehaviour
     bool enemyDetected = false;
     #region Character_state_attributes
     int _coinsCollected;
+    float _timerToDescount = 0;
+    bool touchingLava = false;
 
     [SerializeField]
     int _lifePoints;
@@ -43,6 +45,7 @@ public class CharacterStateController : MonoBehaviour
 
     {
         GameObject other = hit.collider.gameObject;
+
         if (other.CompareTag("Collectable"))
         {
             Collectable collectable = other.GetComponent<Collectable>();
@@ -71,10 +74,30 @@ public class CharacterStateController : MonoBehaviour
             enemy = other.gameObject.transform;
             enemyDetected = true;
         }
+        if (other.CompareTag("Lava"))
+        {
+            if (_timerToDescount == 0){
+                _lifePoints -= 5;
+                _timerToDescount += 1;
+                Debug.Log("Descounting Life"+ _lifePoints);
+            }
+            touchingLava = true;
+        }
 
     }
 
     private void Update() {
+
+        if (touchingLava){
+            _timerToDescount = _timerToDescount + Time.deltaTime;
+            if (_timerToDescount >= 5) _timerToDescount = 0;
+            touchingLava = false;
+        }
+        else {
+            _timerToDescount = 0;
+        } 
+
+
         if (enemyDetected)
         {
             distance = Vector3.Distance(enemy.position, player.position);
