@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 public class DestructablePlatorm : MonoBehaviour
 {
     [SerializeField]
@@ -12,6 +12,9 @@ public class DestructablePlatorm : MonoBehaviour
 
     Timer timer;
     bool destructionStarted;
+
+    UnityAction listener;
+
     public bool DestructionStarted 
     {
         get
@@ -28,6 +31,11 @@ public class DestructablePlatorm : MonoBehaviour
         destructionStarted = false;
         timer = gameObject.AddComponent<Timer>();
         timer.MaxTime = maxTime;
+
+        listener = ActivatePlatform;
+
+        EventManager.StartListening("timerPlatformFallDown", listener);
+
     }
 
     // Update is called once per frame
@@ -36,7 +44,6 @@ public class DestructablePlatorm : MonoBehaviour
         if(!timer.Running && timer.Started)
         {
             gameObject.SetActive(false);
-            Destroy(gameObject);
         }
         if(timer.Started && timer.Running && timer.TimeRemaning <= 1f)
         {
@@ -51,6 +58,14 @@ public class DestructablePlatorm : MonoBehaviour
                 renderer.material.SetColor("_Color", Color.black);
             }
         }
+    }
+
+    public void ActivatePlatform()
+    {
+        gameObject.SetActive(true);
+        destructionStarted = false;
+        timer.Restart();
+        renderer.material.SetColor("_Color", Color.black);
     }
 
     public void startTimer()
