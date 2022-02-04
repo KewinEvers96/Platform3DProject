@@ -397,7 +397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f62a42259dca3f9b2bb10e588319eb9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Target: {fileID: 0}
+  m_Target: {fileID: 4709030455453630460, guid: e6034e4381f26424baf280d702491aaa, type: 3}
   distance_follow: 10
   distance_figth: 1.5
   state: {fileID: 0}
