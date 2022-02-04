@@ -55,6 +55,11 @@ public class CharacterStateController : MonoBehaviour
             CoinSpawner coinSpawner = other.GetComponent<CoinSpawner>();
             coinSpawner.SpawnCoins();
         }
+        if (other.CompareTag ("Caida"))
+        {
+            Caida caida = other.GetComponent<Caida>();
+            caida.CaidaLibre();
+        }
 
         if (other.CompareTag("Enemy"))
         {
