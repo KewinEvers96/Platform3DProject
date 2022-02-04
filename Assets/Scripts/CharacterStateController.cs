@@ -14,7 +14,10 @@ public class CharacterStateController : MonoBehaviour
     float _timerToDescount = 0;
     bool touchingLava = false;
 
-    [SerializeField]
+    #region DamageCotrolVariables
+    Timer damageTimer;
+    bool recevingDamage;
+    #endregion
     int _lifePoints;
 
     public int Coins
@@ -26,6 +29,15 @@ public class CharacterStateController : MonoBehaviour
         set
         {
             _coinsCollected = value;
+            EventManager.TriggerEvent("coinsAdded");
+        }
+    }
+
+    public int LifePoints
+    {
+        get
+        {
+            return _lifePoints;
         }
     }
 
@@ -33,11 +45,12 @@ public class CharacterStateController : MonoBehaviour
     #endregion
 
 
-    private void Start()
+    private void Awake()
     {
         _coinsCollected = 0;
         _lifePoints = 100;
-
+        damageTimer = GetComponent<Timer>();
+        damageTimer.MaxTime = 3f;
         player = GetComponent<Transform>();
     }
 
@@ -50,7 +63,6 @@ public class CharacterStateController : MonoBehaviour
         {
             Collectable collectable = other.GetComponent<Collectable>();
             collectable.OnCollected(this);
-            Debug.Log("coins: " + _coinsCollected);
         }
 
         if (other.CompareTag("CoinSpawner"))
@@ -66,6 +78,7 @@ public class CharacterStateController : MonoBehaviour
 
         if (other.CompareTag("CaidaLibrePlatforms"))
         {
+            UpdateLifePoints();
             EventManager.TriggerEvent("timerPlatformFallDown");
         }
 
@@ -77,9 +90,8 @@ public class CharacterStateController : MonoBehaviour
         if (other.CompareTag("Lava"))
         {
             if (_timerToDescount == 0){
-                _lifePoints -= 5;
+                UpdateLifePoints();
                 _timerToDescount += 1;
-                Debug.Log("Descounting Life"+ _lifePoints);
             }
             touchingLava = true;
         }
@@ -103,7 +115,7 @@ public class CharacterStateController : MonoBehaviour
             distance = Vector3.Distance(enemy.position, player.position);
             if (distance < 1.5f && figthing == false)
             {
-                _lifePoints -= 5;
+                UpdateLifePoints();
                 figthing = true;
             }
             else if (distance > 1.5f)
@@ -111,6 +123,22 @@ public class CharacterStateController : MonoBehaviour
                 figthing = false;
                 enemyDetected = false;
             }
+        }
+    }
+
+    void UpdateLifePoints()
+    {
+        if(!recevingDamage && !damageTimer.Started)
+        {
+            _lifePoints -= 5;
+            EventManager.TriggerEvent("LifePointsUpdated");
+            recevingDamage = true;
+            damageTimer.RunTimer();
+        }
+        if(recevingDamage && damageTimer.Started && !damageTimer.Running)
+        {
+            recevingDamage = false;
+            damageTimer.Restart();
         }
     }
 

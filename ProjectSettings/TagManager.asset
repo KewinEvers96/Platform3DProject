@@ -13,6 +13,8 @@ TagManager:
   - PlatformsTimer
   - CaidaLibrePlatforms
   - Lava
+  - CoinsText
+  - LifeText
   layers:
   - Default
   - TransparentFX
