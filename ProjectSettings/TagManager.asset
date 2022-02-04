@@ -9,6 +9,7 @@ TagManager:
   - Caida
   - Destructable
   - Enemy
+  - Rock
   - FireBall
   - PlatformsTimer
   - CaidaLibrePlatforms

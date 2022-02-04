@@ -9,15 +9,18 @@ public class Patrol : MonoBehaviour
 
     private Transform m_Agent;
 
-    public static bool startPatrol = false;
-
-    Vector3 nextPosition = new Vector3(0,0,0);
+    Vector3 nextPosition;
 
     float distance;
+    public State state;
+
     void Start()
     {
+        
+        state = GetComponent<State>();
         m_MovableAgent = GetComponent<PlayerMovement>();
         m_PathContainer = GetComponent<PathContainer>();
+        nextPosition = m_PathContainer.NextPoint();
         m_Agent = GetComponent<Transform>();
     }
 
@@ -26,18 +29,17 @@ public class Patrol : MonoBehaviour
 
         distance = Vector3.Distance(nextPosition, m_Agent.position);
 
-        if (PlayerMovement.walk == true && startPatrol == false){
+        // Debug.Log(gameObject);
+        // Debug.Log(distance);
+        // Debug.Log(nextPosition);
+        
+        if (state.walk == true){
 
-            startPatrol = true;
-            nextPosition = m_PathContainer.NextPoint();
             m_MovableAgent.FollowPatrol(nextPosition);
+            if (distance <= 1){
+                nextPosition = m_PathContainer.NextPoint();
+            }
 
-        }
-
-        if (startPatrol == true && distance < 1){
-            
-            nextPosition = m_PathContainer.NextPoint();
-            m_MovableAgent.FollowPatrol(nextPosition);
         }
         
     }

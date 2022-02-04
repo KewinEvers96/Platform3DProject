@@ -10,31 +10,28 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 TargetPosition => m_TargetPosition;
     public Animator animator;
 
-    private Action m_OnArrive;
-
-    public static bool figth;
-    public static bool run;
-    public static bool walk;
+    private Action m_OnArrive;    
+    public State state;
 
     private void Start() {
+        state = GetComponent<State>();
         m_NavMeshAgent = GetComponent<NavMeshAgent>();
         m_NavMeshAgent.speed = 2f;
     }
 
     void Update()
     {
-        animator.SetBool("IsMoving", run);
-        animator.SetBool("IsFighting", figth);
-        animator.SetBool("isWalking", walk);      
+        animator.SetBool("IsMoving", state.run);
+        animator.SetBool("IsFighting", state.figth);
+        animator.SetBool("isWalking", state.walk);      
     }
 
     public void GoTo(Vector3 position)
     {
-        PlayerMovement.walk = false;
-        PlayerMovement.figth = false;
-        PlayerMovement.run = true;
+        state.walk = false;
+        state.figth = false;
+        state.run = true;
         m_NavMeshAgent.isStopped = false;
-        Patrol.startPatrol = false;
         m_TargetPosition = position;
         m_NavMeshAgent.SetDestination(position);
     }
