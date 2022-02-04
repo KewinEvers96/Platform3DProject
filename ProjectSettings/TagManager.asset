@@ -8,6 +8,7 @@ TagManager:
   - CoinSpawner
   - Destructable
   - Enemy
+  - Rock
   layers:
   - Default
   - TransparentFX
