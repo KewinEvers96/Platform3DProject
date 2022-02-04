@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Collectable
   - CoinSpawner
+  - Caida
   layers:
   - Default
   - TransparentFX
