@@ -12,6 +12,7 @@ TagManager:
   - FireBall
   - PlatformsTimer
   - CaidaLibrePlatforms
+  - Lava
   layers:
   - Default
   - TransparentFX
