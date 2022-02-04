@@ -631,8 +631,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Target: {fileID: 531575614}
-  distance_follow: 20
-  distance_figth: 10
+  distance_follow: 10
+  distance_figth: 1.5
   state: {fileID: 0}
 --- !u!195 &905289709
 NavMeshAgent:
