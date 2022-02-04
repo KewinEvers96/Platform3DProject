@@ -5,10 +5,10 @@ using UnityEngine;
 public class CharacterStateController : MonoBehaviour
 {
     private Transform player;
-    [SerializeField] private Transform enemy;
+    private Transform enemy;
     float distance;
     bool figthing = false;
-
+    bool enemyDetected = false;
     #region Character_state_attributes
     int _coinsCollected;
 
@@ -55,15 +55,30 @@ public class CharacterStateController : MonoBehaviour
             CoinSpawner coinSpawner = other.GetComponent<CoinSpawner>();
             coinSpawner.SpawnCoins();
         }
+
+        if (other.CompareTag("Enemy"))
+        {
+            enemy = other.gameObject.transform;
+            enemyDetected = true;
+        }
+
     }
 
     private void Update() {
-        distance = Vector3.Distance(enemy.position, player.position);
-        if (distance < 1.5f && figthing == false){
-            _lifePoints -= 5;
-            figthing = true;
+        if (enemyDetected)
+        {
+            distance = Vector3.Distance(enemy.position, player.position);
+            if (distance < 1.5f && figthing == false)
+            {
+                _lifePoints -= 5;
+                figthing = true;
+            }
+            else if (distance > 1.5f)
+            {
+                figthing = false;
+                enemyDetected = false;
+            }
         }
-        else if (distance > 1.5f) figthing = false;
     }
 
 }
