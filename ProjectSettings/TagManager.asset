@@ -6,9 +6,19 @@ TagManager:
   tags:
   - Collectable
   - CoinSpawner
+  - Caida
   - Destructable
   - Enemy
   - Rock
+<<<<<<< HEAD
+=======
+  - FireBall
+  - PlatformsTimer
+  - CaidaLibrePlatforms
+  - Lava
+  - CoinsText
+  - LifeText
+>>>>>>> master
   layers:
   - Default
   - TransparentFX
