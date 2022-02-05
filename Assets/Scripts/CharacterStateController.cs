@@ -20,6 +20,7 @@ public class CharacterStateController : MonoBehaviour
     #endregion
     int _lifePoints;
     bool dead;
+    bool arrivedToWinSpot = false;
     public int Coins
     {
         get
@@ -48,9 +49,10 @@ public class CharacterStateController : MonoBehaviour
     private void Awake()
     {
         _coinsCollected = 0;
-        _lifePoints = 100;
+        _lifePoints = 20;
         damageTimer = GetComponent<Timer>();
-        damageTimer.MaxTime = 3f;
+        damageTimer.MaxTime = 1f;
+        dead = false;
         player = GetComponent<Transform>();
     }
 
@@ -98,6 +100,13 @@ public class CharacterStateController : MonoBehaviour
             touchingLava = true;
         }
 
+        if (other.CompareTag("WinSpot") && !arrivedToWinSpot)
+        {
+            arrivedToWinSpot = true;
+            EventManager.TriggerEvent("GameWon");
+        }
+
+
     }
 
     private void Update() {
@@ -112,7 +121,7 @@ public class CharacterStateController : MonoBehaviour
         }
 
 
-        if (enemyDetected)
+        if (enemyDetected && enemy != null)
         {
             distance = Vector3.Distance(enemy.position, player.position);
             if (distance < 1.5f && figthing == false)
@@ -132,7 +141,13 @@ public class CharacterStateController : MonoBehaviour
             dead = true;
         }
 
-
+        if(_coinsCollected >= 5)
+        {
+            _lifePoints += 1;
+            _coinsCollected -= 5;
+            EventManager.TriggerEvent("LifePointsUpdated");
+            EventManager.TriggerEvent("coinsAdded");
+        }
     }
 
     void UpdateLifePoints()
