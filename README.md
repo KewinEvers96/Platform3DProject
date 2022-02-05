@@ -1,6 +1,6 @@
-Materia: Introducción a la creación de Videojuegos
+# Materia: Introducción a la creación de Videojuegos
 
-Integrantes:
+# Integrantes:
 	- Kewin Evers Yagari: keversy@unal.edu.co
 	- Alejandra Maria Lizarazo Salazar: amlizarazos@unal.edu.co
 	- Valentina Ríos Vargas
