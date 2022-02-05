@@ -3,7 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags: 
+  - Collectable
+  - CoinSpawner
+  - Caida
+  - Destructable
+  - Enemy
+  - Rock
+  - FireBall
+  - PlatformsTimer
+  - CaidaLibrePlatforms
+  - Lava
+  - CoinsText
+  - LifeText
   layers:
   - Default
   - TransparentFX
