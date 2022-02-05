@@ -19,7 +19,7 @@ public class CharacterStateController : MonoBehaviour
     bool recevingDamage;
     #endregion
     int _lifePoints;
-
+    bool dead;
     public int Coins
     {
         get
@@ -72,6 +72,7 @@ public class CharacterStateController : MonoBehaviour
         }
         if (other.CompareTag ("Caida"))
         {
+            UpdateLifePoints();
             Caida caida = other.GetComponent<Caida>();
             caida.CaidaLibre();
         }
@@ -90,7 +91,8 @@ public class CharacterStateController : MonoBehaviour
         if (other.CompareTag("Lava"))
         {
             if (_timerToDescount == 0){
-                UpdateLifePoints();
+                _lifePoints -= 5;
+                EventManager.TriggerEvent("LifePointsUpdated");
                 _timerToDescount += 1;
             }
             touchingLava = true;
@@ -100,14 +102,14 @@ public class CharacterStateController : MonoBehaviour
 
     private void Update() {
 
-        if (touchingLava){
+        if (touchingLava) {
             _timerToDescount = _timerToDescount + Time.deltaTime;
             if (_timerToDescount >= 5) _timerToDescount = 0;
             touchingLava = false;
         }
         else {
             _timerToDescount = 0;
-        } 
+        }
 
 
         if (enemyDetected)
@@ -124,6 +126,13 @@ public class CharacterStateController : MonoBehaviour
                 enemyDetected = false;
             }
         }
+
+        if (_lifePoints <= 0 && !dead) {
+            EventManager.TriggerEvent("GameOver");
+            dead = true;
+        }
+
+
     }
 
     void UpdateLifePoints()

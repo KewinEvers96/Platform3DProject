@@ -1149,11 +1149,14 @@ GameObject:
   - component: {fileID: 4694050025630405140}
   - component: {fileID: 4694050025630405141}
   - component: {fileID: 4694050025630405144}
-  - component: {fileID: 4694050025630405151}
-  - component: {fileID: 9116643904032932371}
+  - component: {fileID: 1024041987}
+  - component: {fileID: 1024041988}
+  - component: {fileID: 1024041994}
+  - component: {fileID: 1024041995}
+  - component: {fileID: 7071855201094680753}
   m_Layer: 0
   m_Name: Ortiz
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1165,7 +1168,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5613161276870961746}
-  m_LocalRotation: {x: -0, y: -0.99464077, z: -0, w: -0.103391565}
+  m_LocalRotation: {x: -0, y: -0.99464077, z: 0, w: -0.103391394}
   m_LocalPosition: {x: -2.48, y: 1.24, z: 0.0126517415}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1236,6 +1239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1174885387958659730}
+  state: {fileID: 0}
 --- !u!195 &4694050025630405144
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1247,7 +1251,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 0.3
-  m_Acceleration: 2
+  m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -1258,7 +1262,27 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &4694050025630405151
+--- !u!114 &1024041987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5613161276870961746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ee627b24817b1de8a6bd92c1ff7968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pathPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &1024041988
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1270,9 +1294,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f62a42259dca3f9b2bb10e588319eb9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Target: {fileID: 0}
-  player_near: 1.5
---- !u!114 &9116643904032932371
+  m_Target: {fileID: 4709030455453630460, guid: e6034e4381f26424baf280d702491aaa, type: 3}
+  distance_follow: 10
+  distance_figth: 1.5
+  state: {fileID: 0}
+--- !u!114 &1024041994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5613161276870961746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ed1fc40765420ac2b59ba00bf96197b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: {fileID: 0}
+--- !u!114 &1024041995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5613161276870961746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb00aba604020774b83c4eb62ca305f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  figth: 0
+  run: 0
+  walk: 0
+--- !u!114 &7071855201094680753
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
