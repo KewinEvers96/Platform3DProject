@@ -72,6 +72,7 @@ public class CharacterStateController : MonoBehaviour
         }
         if (other.CompareTag ("Caida"))
         {
+            UpdateLifePoints();
             Caida caida = other.GetComponent<Caida>();
             caida.CaidaLibre();
         }
@@ -90,7 +91,8 @@ public class CharacterStateController : MonoBehaviour
         if (other.CompareTag("Lava"))
         {
             if (_timerToDescount == 0){
-                UpdateLifePoints();
+                _lifePoints -= 5;
+                EventManager.TriggerEvent("LifePointsUpdated");
                 _timerToDescount += 1;
             }
             touchingLava = true;
